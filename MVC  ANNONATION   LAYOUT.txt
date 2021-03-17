@@ -1,0 +1,117 @@
+MVC ANNONATION FRAMEWORK
+========================
+1)option models goto add class change name is 'Employee'
+======
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication27.Models
+{
+    public class Employee
+    {
+        [Required(ErrorMessage = "Employee ID is must")]
+        [Display(Name = "Employee ID")]
+        public int EmpId { get; set; }
+
+        [Required(ErrorMessage = "Employee Name is must")]
+        [Display(Name = "Employee Name")]
+        [MinLength(5, ErrorMessage = "Employee Name must be 5 characters")]
+        [MaxLength(15, ErrorMessage = "Employee Name must be 15 characters")]
+        public string EmpName { get; set; }
+
+        [Required(ErrorMessage = "Employee Salary is must")]
+        [Display(Name = "Employee Salary")]
+        public int EmpSal { get; set; }
+    }
+}
+
+==============
+2) goto controll class and add 'MVC 5 MCONTROLL EMPTY'
+========
+  using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using WebApplication27.Models;
+namespace WebApplication27.Controllers
+{
+    public class HomeController : Controller
+    {
+        // GET: Home
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(Employee emp)
+        {
+            return View();
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+    }
+}
+=============
+3)click index and add the  'MVC5 VIEW'
+=========
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+===========
+4)and click on the Login add the 'MVC 5 VIEW'
+======
+@model WebApplication27.Models.Employee
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr> <td> @Html.LabelFor(Model => Model.EmpName)</td> <td>@Html.LabelFor(Model => Model.EmpName)</td></tr>
+        <tr> <td> @Html.Label("Employee Password")</td><td> @Html.Password("pwd")</td></tr>
+        <tr>
+            <td><input type="submit" value="Login" /></td>
+        </tr>
+    </table>
+}
+==========
+
+5) and add the 'LAYOUT.CSHTML'
+===============
+</head>
+<body>
+    <table border="1" width="1300px" height="600px">
+        <tr>
+            <td colspan="2" align="center" height="100px" style="background-color:darkslategrey"><font size="6" color="black">Ojas Innovative Technologies Pvt.Ltd</font></td>
+        </tr>
+        <tr>
+            <td width="150" height="400">@Html.ActionLink("Register", "Index")<Br />@Html.ActionLink("SingIn", "Login")  </td>
+            <td align="center">@RenderBody()</td>
+        </tr>
+        <tr>
+            <td colspan="2" height="100px" style="background-color:cadetblue;text-align:center;color:red"> CopyRights Reserved &copy; Ojas</td>
+        </tr>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
